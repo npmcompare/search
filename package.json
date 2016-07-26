@@ -1,0 +1,31 @@
+{
+  "name": "npmcompare-search",
+  "version": "1.0.0",
+  "description": "\u001b[2~npm packages search proxy with caching ",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/npmcompare/search.git"
+  },
+  "keywords": [
+    "npm",
+    "search"
+  ],
+  "author": "Daniel Cohen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/npmcompare/search/issues"
+  },
+  "homepage": "https://github.com/npmcompare/search#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "got": "^6.3.0",
+    "memoizee": "^0.4.1",
+    "rc": "^1.1.6",
+    "validate-npm-package-name": "^2.2.2"
+  }
+}
