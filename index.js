@@ -1,6 +1,7 @@
 'use strict';
 
 const validate = require("validate-npm-package-name");
+const cors = require('cors')
 const app = require('express')();
 const got = require('got');
 const memoize = require('memoizee');
@@ -28,9 +29,16 @@ const search = memoize(q => {
     maxAge: parseInt(config.search_cache_timeout || 6 * 60 * 60 * 1000) // Default 6 hours
 });
 
+const whitelist = ['http://npmcompare.com', 'https://npmcompare.com', 'http://localhost:3000'];
+const corsOptions = {
+    origin: (origin, callback) => {
+        callback(null, whitelist.indexOf(origin) !== -1);
+    }
+};
+
 app.get('/', (req, res) => res.send('npmcompare search'));
 
-app.get('/:query', (req, res) => {
+app.get('/:query', cors(corsOptions), (req, res) => {
     let q = req.params.query.toLowerCase();
     let valid = validate(q);
     if (!q || !valid.validForNewPackages) return res.status(400).json('invalid package name provided');
